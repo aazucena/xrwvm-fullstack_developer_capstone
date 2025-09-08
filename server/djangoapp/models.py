@@ -41,28 +41,32 @@ class CarMake(models.Model):
         ('ARCHIVED', 'Archived'),
     ]
 
-
     name = models.CharField(max_length=100)
     description = models.TextField()
     founded_year = models.IntegerField(null=True,
-        validators=[
-            MaxValueValidator(2025),
-            MinValueValidator(2015)
-        ])
+                                       validators=[
+                                           MaxValueValidator(2025),
+                                           MinValueValidator(2015)
+                                       ])
     defunct_year = models.IntegerField(null=True,
-        validators=[
-            MaxValueValidator(2025),
-            MinValueValidator(2015)
-        ])
-    country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='OTHER')
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='DRAFT')
+                                       validators=[
+                                           MaxValueValidator(2025),
+                                           MinValueValidator(2015)
+                                       ])
+    country = models.CharField(
+        max_length=20,
+        choices=COUNTRY_CHOICES,
+        default='OTHER')
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='DRAFT')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # Other fields as needed
 
     def __str__(self):
         return self.name  # Return the name as the string representation
-
 
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
@@ -75,7 +79,8 @@ class CarMake(models.Model):
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
+    car_make = models.ForeignKey(
+        CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
     name = models.CharField(max_length=100)
     CAR_TYPES = [
         ('SEDAN', 'Sedan'),
@@ -85,21 +90,21 @@ class CarModel(models.Model):
     ]
     type = models.CharField(max_length=10, choices=CAR_TYPES, default='SUV')
     year = models.IntegerField(default=2025,
-        validators=[
-            MaxValueValidator(2025),
-            MinValueValidator(2015)
-        ])
+                               validators=[
+                                   MaxValueValidator(2025),
+                                   MinValueValidator(2015)
+                               ])
     # Other fields as needed
     production_start_year = models.IntegerField(null=True,
-        validators=[
-            MaxValueValidator(2025),
-            MinValueValidator(2015)
-        ])
+                                                validators=[
+                                                    MaxValueValidator(2025),
+                                                    MinValueValidator(2015)
+                                                ])
     production_end_year = models.IntegerField(null=True,
-        validators=[
-            MaxValueValidator(2025),
-            MinValueValidator(2015)
-        ])
+                                              validators=[
+                                                  MaxValueValidator(2025),
+                                                  MinValueValidator(2015)
+                                              ])
 
     def __str__(self):
         return self.name  # Return the name as the string representation
